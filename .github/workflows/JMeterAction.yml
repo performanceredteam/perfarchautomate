@@ -1,0 +1,56 @@
+# This is a basic workflow to help you get started with Actions
+name: JMeter
+on:
+    workflow_dispatch:
+      inputs:
+        target_concurrency:
+          type: string
+          description: Target Concurrency
+          required: true
+        ramp_up_time:
+          type: string
+          description: Ramp Up Time
+          required: true
+        ramp_steps_count:
+          type: string
+          description: Ramp Steps Count
+          required: true
+        target_rate_time:
+          type: string
+          description: Target Rate Time
+          required: true
+        think_time:
+          type: string
+          description: Think Time
+          required: true
+    
+jobs:
+  test-action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone PUBLIC repository
+        uses: actions/checkout@main
+      - name: pwd
+        run: sudo pwd
+      - name: Setup Curl
+        run: sudo apt-get install curl
+      - name: Setup UnZip
+        run: sudo apt-get install unzip
+      - name: Temp
+        run: sudo mkdir -p /tmp/jmeter/
+      - name: Download JMeter
+        run: sudo curl -O https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.5.tgz 
+      - name: JMeter Folder
+        run: sudo mkdir -p /home/jmeter/
+      - name: Setup tzdata
+        run: sudo apt-get install tzdata
+      - name: JMeter tar
+        run: sudo tar -xzf /home/runner/work/jmeter/jmeter/apache-jmeter-5.5.tgz
+      - name: Download Plugin JMeter
+        run: wget -O /home/runner/work/jmeter/jmeter/jpgc-casutg-2.10.zip https://jmeter-plugins.org/files/packages/jpgc-casutg-2.10.zip
+      - name: Unzip Plugin
+        run: sudo unzip -o /home/runner/work/jmeter/jmeter/jpgc-casutg-2.10.zip -d /home/runner/work/jmeter/jmeter/apache-jmeter-5.5/
+      - name: Run JMeter
+        run: sh /home/runner/work/jmeter/jmeter/apache-jmeter-5.5/bin/jmeter.sh -n -t /home/runner/work/jmeter/jmeter/pokeapi.jmx 
+             -JTargetConcurrency=${{ inputs.target_concurrency }} -JRampUpTime=${{ inputs.ramp_up_time }} -JRampStepsCount=${{ inputs.ramp_steps_count }}
+             -JTargetRateTime=${{ inputs.target_rate_time }} -JThinkTime=${{ inputs.think_time }}
