@@ -44,7 +44,7 @@
         </HTTPSamplerProxy>
         <hashTree>
           <GaussianRandomTimer guiclass="GaussianRandomTimerGui" testclass="GaussianRandomTimer" testname="Gaussian Random Timer" enabled="true">
-            <stringProp name="ConstantTimer.delay">${__P(ThinkTime,5)}</stringProp>
+            <stringProp name="ConstantTimer.delay">${__P(ThinkTime,5)}000</stringProp>
             <stringProp name="RandomTimer.range">100.0</stringProp>
           </GaussianRandomTimer>
           <hashTree/>
