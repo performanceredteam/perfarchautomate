@@ -45,6 +45,7 @@ jobs:
              sudo tar -xzf apache-jmeter-5.5.tgz
              sudo wget -O jpgc-casutg-2.10.zip https://jmeter-plugins.org/files/packages/jpgc-casutg-2.10.zip
              sudo unzip -o jpgc-casutg-2.10.zip -d /apache-jmeter-5.5/
+             sudo pwd
      - name: Run JMeter Scenario
        run: sh /apache-jmeter-5.5/bin/jmeter.sh -n -t /PokeAPI.jmx 
              -JTargetConcurrency=${{ inputs.targetconcurrency }} -JRampUpTime=${{ inputs.rampuptime }} -JRampStepsCount=${{ inputs.rampstepscount }}
