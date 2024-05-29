@@ -39,21 +39,19 @@ jobs:
              sudo apt-get install tzdata
      - name: Preparing Environment
        run: |
-             sudo mkdir -p /tmp/jmeter/
-             sudo mkdir -p /home/jmeter/
              sudo curl -O https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.5.tgz 
-             sudo tar -xzf /home/runner/work/perfarchatomate/perfarchatomate/apache-jmeter-5.5.tgz
-             sudo wget -O /home/runner/work/perfarchatomate/perfarchatomate/jpgc-casutg-2.10.zip https://jmeter-plugins.org/files/packages/jpgc-casutg-2.10.zip
-             sudo unzip -o /home/runner/work/perfarchatomate/perfarchatomate/jpgc-casutg-2.10.zip -d /home/runner/work/perfarchatomate/perfarchatomate/apache-jmeter-5.5/
+             sudo tar -xzf apache-jmeter-5.5.tgz
+             sudo wget -O jpgc-casutg-2.10.zip https://jmeter-plugins.org/files/packages/jpgc-casutg-2.10.zip
+             sudo unzip -o jpgc-casutg-2.10.zip -d apache-jmeter-5.5/
      - name: Run JMeter Scenario
-       run: sh /home/runner/work/perfarchatomate/perfarchatomate/apache-jmeter-5.5/bin/jmeter.sh -n -t /home/runner/work/perfarchatomate/perfarchatomate/PokeAPI.jmx 
+       run: sh /home/runner/work/perfarchautomate/perfarchautomate/apache-jmeter-5.5/bin/jmeter.sh -n -t /home/runner/work/perfarchautomate/perfarchautomate/PokeAPI.jmx 
              -JTargetConcurrency=${{ inputs.targetconcurrency }} -JRampUpTime=${{ inputs.rampuptime }} -JRampStepsCount=${{ inputs.rampstepscount }}
-             -JTargetRateTime=${{ inputs.targetratetime }} -JThinkTime=${{ inputs.thinktime }} -l /home/runner/work/perfarchatomate/perfarchatomate/pokeapi.jtl
+             -JTargetRateTime=${{ inputs.targetratetime }} -JThinkTime=${{ inputs.thinktime }} -l /home/runner/work/perfarchautomate/perfarchautomate/pokeapi.jtl
      - name: Generate HTML Report
-       run: sh /home/runner/work/perfarchatomate/perfarchatomate/apache-jmeter-5.5/bin/jmeter.sh -g /home/runner/work/perfarchatomate/perfarchatomate/pokeapi.jtl
-            -o /home/runner/work/perfarchatomate/perfarchatomate/reports
+       run: sh /home/runner/work/perfarchautomate/perfarchautomate/apache-jmeter-5.5/bin/jmeter.sh -g /home/runner/work/perfarchautomate/perfarchautomate/pokeapi.jtl
+            -o /home/runner/work/perfarchautomate/perfarchautomate/reports
      - name: Upload HTML Report
-       uses: actions/upload-artifact@v1
+       uses: actions/upload-artifact@v4
        with:
-         name: jmeter-test-results-$(date +'%Y-%m-%dT%H:%M:%S')
-         path: /home/runner/work/perfarchatomate/perfarchatomate/reports/
+         name: jmeter-test-results
+         path: /home/runner/work/perfarchautomate/perfarchautomate/reports
