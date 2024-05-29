@@ -51,7 +51,7 @@ jobs:
        run: sh /home/runner/work/perfarchautomate/perfarchautomate/apache-jmeter-5.5/bin/jmeter.sh -g /home/runner/work/perfarchautomate/perfarchautomate/pokeapi.jtl
             -o /home/runner/work/perfarchautomate/perfarchautomate/reports
      - name: Upload HTML Report
-       uses: actions/upload-artifact@v1
+       uses: actions/upload-artifact@v4
        with:
          name: jmeter-test-results
          path: /home/runner/work/perfarchautomate/perfarchautomate/reports
