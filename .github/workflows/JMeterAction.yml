@@ -47,7 +47,7 @@ jobs:
              sudo unzip -o jpgc-casutg-2.10.zip -d /apache-jmeter-5.5/
              sudo pwd
      - name: Run JMeter Scenario
-       run: sh /apache-jmeter-5.5/bin/jmeter.sh -n -t /PokeAPI.jmx 
+       run: sh /home/runner/work/perfarchautomate/perfarchautomate/apache-jmeter-5.5/bin/jmeter.sh -n -t /PokeAPI.jmx 
              -JTargetConcurrency=${{ inputs.targetconcurrency }} -JRampUpTime=${{ inputs.rampuptime }} -JRampStepsCount=${{ inputs.rampstepscount }}
              -JTargetRateTime=${{ inputs.targetratetime }} -JThinkTime=${{ inputs.thinktime }} -l /pokeapi.jtl
      - name: Generate HTML Report
