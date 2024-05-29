@@ -28,7 +28,7 @@ jobs:
  test-action:
    runs-on: ubuntu-latest
    steps:
-     - name: Cloning performanceredteam repository
+     - name: Cloning perfarchatomate repository
        uses: actions/checkout@main
        with:
            ref: pokeapi
@@ -42,18 +42,18 @@ jobs:
              sudo mkdir -p /tmp/jmeter/
              sudo mkdir -p /home/jmeter/
              sudo curl -O https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.5.tgz 
-             sudo tar -xzf /home/runner/work/performanceredteam/performanceredteam/apache-jmeter-5.5.tgz
-             sudo wget -O /home/runner/work/performanceredteam/performanceredteam/jpgc-casutg-2.10.zip https://jmeter-plugins.org/files/packages/jpgc-casutg-2.10.zip
-             sudo unzip -o /home/runner/work/performanceredteam/performanceredteam/jpgc-casutg-2.10.zip -d /home/runner/work/performanceredteam/performanceredteam/apache-jmeter-5.5/
+             sudo tar -xzf /home/runner/work/perfarchatomate/perfarchatomate/apache-jmeter-5.5.tgz
+             sudo wget -O /home/runner/work/perfarchatomate/perfarchatomate/jpgc-casutg-2.10.zip https://jmeter-plugins.org/files/packages/jpgc-casutg-2.10.zip
+             sudo unzip -o /home/runner/work/perfarchatomate/perfarchatomate/jpgc-casutg-2.10.zip -d /home/runner/work/perfarchatomate/perfarchatomate/apache-jmeter-5.5/
      - name: Run JMeter Scenario
-       run: sh /home/runner/work/performanceredteam/performanceredteam/apache-jmeter-5.5/bin/jmeter.sh -n -t /home/runner/work/performanceredteam/performanceredteam/PokeAPI.jmx 
+       run: sh /home/runner/work/perfarchatomate/perfarchatomate/apache-jmeter-5.5/bin/jmeter.sh -n -t /home/runner/work/perfarchatomate/perfarchatomate/PokeAPI.jmx 
              -JTargetConcurrency=${{ inputs.targetconcurrency }} -JRampUpTime=${{ inputs.rampuptime }} -JRampStepsCount=${{ inputs.rampstepscount }}
-             -JTargetRateTime=${{ inputs.targetratetime }} -JThinkTime=${{ inputs.thinktime }} -l /home/runner/work/performanceredteam/performanceredteam/pokeapi.jtl
+             -JTargetRateTime=${{ inputs.targetratetime }} -JThinkTime=${{ inputs.thinktime }} -l /home/runner/work/perfarchatomate/perfarchatomate/pokeapi.jtl
      - name: Generate HTML Report
-       run: sh /home/runner/work/performanceredteam/performanceredteam/apache-jmeter-5.5/bin/jmeter.sh -g /home/runner/work/performanceredteam/performanceredteam/pokeapi.jtl
-            -o /home/runner/work/performanceredteam/performanceredteam/reports
+       run: sh /home/runner/work/perfarchatomate/perfarchatomate/apache-jmeter-5.5/bin/jmeter.sh -g /home/runner/work/perfarchatomate/perfarchatomate/pokeapi.jtl
+            -o /home/runner/work/perfarchatomate/perfarchatomate/reports
      - name: Upload HTML Report
        uses: actions/upload-artifact@v1
        with:
          name: jmeter-test-results-$(date +'%Y-%m-%dT%H:%M:%S')
-         path: /home/runner/work/performanceredteam/performanceredteam/reports/
+         path: /home/runner/work/perfarchatomate/perfarchatomate/reports/
