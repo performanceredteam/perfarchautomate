@@ -42,6 +42,7 @@ jobs:
              sudo mkdir -p /tmp/jmeter/
              sudo mkdir -p /home/jmeter/
              sudo curl -O https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.5.tgz 
+             sudo ls
              sudo tar -xzf /home/runner/work/perfarchatomate/perfarchatomate/apache-jmeter-5.5.tgz
              sudo wget -O /home/runner/work/perfarchatomate/perfarchatomate/jpgc-casutg-2.10.zip https://jmeter-plugins.org/files/packages/jpgc-casutg-2.10.zip
              sudo unzip -o /home/runner/work/perfarchatomate/perfarchatomate/jpgc-casutg-2.10.zip -d /home/runner/work/perfarchatomate/perfarchatomate/apache-jmeter-5.5/
@@ -55,5 +56,5 @@ jobs:
      - name: Upload HTML Report
        uses: actions/upload-artifact@v1
        with:
-         name: jmeter-test-results-$(date +'%Y-%m-%dT%H:%M:%S')
+         name: jmeter-test-results
          path: /home/runner/work/perfarchatomate/perfarchatomate/reports/
