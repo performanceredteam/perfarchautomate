@@ -43,10 +43,15 @@ jobs:
              sudo tar -xzf apache-jmeter-5.5.tgz
              sudo wget -O jpgc-casutg-2.10.zip https://jmeter-plugins.org/files/packages/jpgc-casutg-2.10.zip
              sudo unzip -o jpgc-casutg-2.10.zip -d apache-jmeter-5.5/
+             sudo wget -P apache-jmeter-5.5/lib/ext/ https://github.com/mderevyankoaqa/jmeter-influxdb2-listener-plugin/releases/download/v2.5/jmeter-plugins-influxdb2-listener-2.5.jar
      - name: Run JMeter Scenario
        run: sh /home/runner/work/perfarchautomate/perfarchautomate/apache-jmeter-5.5/bin/jmeter.sh -n -t /home/runner/work/perfarchautomate/perfarchautomate/PokeAPI.jmx 
              -JTargetConcurrency=${{ inputs.targetconcurrency }} -JRampUpTime=${{ inputs.rampuptime }} -JRampStepsCount=${{ inputs.rampstepscount }}
-             -JTargetRateTime=${{ inputs.targetratetime }} -JThinkTime=${{ inputs.thinktime }} -l /home/runner/work/perfarchautomate/perfarchautomate/pokeapi.jtl
+             -JTargetRateTime=${{ inputs.targetratetime }} -JThinkTime=${{ inputs.thinktime }} 
+             -JAwsHost=3.15.26.206 
+             -JInfluxToken=oqvSAhnYuOUvIfKDr_7NqrH39VJxSN7Df5vZpYOcmVV0RquENyfPPqNEvVh_S3AFwmnsmO9eMU0uXJ9zNWczEg==
+             -JInfluxOrg=performanceredteam -JInfluxBucket=performanceredteam
+             -l /home/runner/work/perfarchautomate/perfarchautomate/pokeapi.jtl
      - name: Generate HTML Report
        run: sh /home/runner/work/perfarchautomate/perfarchautomate/apache-jmeter-5.5/bin/jmeter.sh -g /home/runner/work/perfarchautomate/perfarchautomate/pokeapi.jtl
             -o /home/runner/work/perfarchautomate/perfarchautomate/reports
