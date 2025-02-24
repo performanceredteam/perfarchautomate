@@ -1,0 +1,25 @@
+version: "3" 
+services: 
+  grafana: 
+    image: grafana/grafana:latest 
+    container_name: grafana_redteam
+    ports: 
+      - 3000:3000 
+    volumes: 
+      - ./grafana:/var/lib/grafana 
+    user: "root:root"
+    restart: always 
+
+  influxdb2: 
+    image: influxdb:2.0 
+    container_name: influxdb_redteam
+    ports: 
+      - '8086:8086' 
+    volumes: 
+      - ./influxdb2:/var/lib/influxdb 
+
+volumes: 
+  db: 
+    driver: local 
+networks: 
+  webnet: 
